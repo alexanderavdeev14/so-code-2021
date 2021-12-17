@@ -3,7 +3,6 @@ package com.company.day16;
 import com.company.Utils;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Solution {
@@ -11,9 +10,10 @@ public class Solution {
         int day = 16;
         List<String> test = Utils.readLines("input/"+day+"/test");
         List<String> input = Utils.readLines("input/"+day+"/input");
-        System.out.println(part1(test));
-        System.out.println(part1(input));
-        System.out.println(part2(test));
+        List<String> test2 = Utils.readLines("input/"+day+"/test2");
+//        System.out.println(part1(test));
+//        System.out.println(part1(input));
+        System.out.println(part2(test2));
         System.out.println(part2(input));
     }
 
@@ -95,93 +95,151 @@ public class Solution {
 
 
     private static String part2(List<String> input){
-        return null;
-    }
-
-    private void constructList(String s, Instructions instructions){
-        if(s.length() == 0 || s.matches("0+")) return;
-        String type = s.substring(3,6);
-        instructions.setInstruction(type);
-        s = s.substring(6);
-        if(type == 4) {
-            s = addLiteralToInstruction(s, instructions);
-        } else {
-            s = otherTypeBts(s);
+        for (int i = 0; i < input.size(); i++) {
+            System.out.println(parse(constructList(hexToBin(input.get(i)),new ArrayList<>())));
         }
-        return sumVersions(s, instructions);
+        return String.valueOf("Done");
     }
 
-    private String addLiteralToInstruction(String s, Instructions instructions) {
-        boolean lastValue;
-        do{
-            lastValue = s.charAt(0) != '0';
-            String value =
-            s = s.substring(5);
-        } while(lastValue);
+    private static List<Object> constructList(String s, List<Object> list) {
+
+        if(s.length() == 0 || s.matches("0+")) return list;
+        long type = bin2Long(s.substring(3,6));
+        list.add(type);
+        s = s.substring(6);
+
+        if(type == 4) {
+            s = addLiteralToInstruction(s, list);
+        } else {
+            s = otherTypeBts(s, list);
+        }
+        return constructList(s,list);
+
+    }
+
+    private static List<Object> constructList(String s, List<Object> list, long numberOfIterations) {
+        if(numberOfIterations == 0) {
+            list.add(0, s);
+            return list;
+        }
+        if(s.length() == 0 || s.matches("0+")) {
+            list.add(0, s);
+            return list;
+        }
+        long type = bin2Long(s.substring(3,6));
+        list.add(type);
+        s = s.substring(6);
+
+        if(type == 4) {
+            s = addLiteralToInstruction(s, list);
+        } else {
+            s = otherTypeBts(s, list);
+        }
+        return constructList(s,list,--numberOfIterations);
+
+    }
+
+    private static String otherTypeBts(String s,  List<Object> list) {
+        if(s.charAt(0) == '0'){
+            s = s.substring(1);
+            long numberOfBits = bin2Long(s.substring(0, 15));
+            s = s.substring(15);
+            List<Object> subList = constructList(s.substring(0, (int) numberOfBits), new ArrayList<>());
+
+//            list.add((long) subList.size());
+            list.add(subList);
+            s = s.substring((int)numberOfBits);
+        } else {
+            s = s.substring(1);
+            long numberOfIterations = bin2Long(s.substring(0, 11));
+            s = s.substring(11);
+            List<Object> e = constructList(s, new ArrayList<>(), numberOfIterations);
+            s = (String) e.remove(0);
+//            list.add(numberOfIterations);
+            list.add(e);
+        }
         return s;
     }
+
+    private static String addLiteralToInstruction(String s,  List<Object> list) {
+        boolean lastValue;
+        StringBuilder sb = new StringBuilder();
+        do{
+            lastValue = s.charAt(0) != '0';
+            sb.append(s, 1, 5);
+            s = s.substring(5);
+        } while(lastValue);
+        list.add(bin2Long(sb.toString()));
+        return s;
+    }
+
+    private static long parse(List<Object> list){
+        Long type = (Long) list.remove(0);
+        if(type == 0){
+            List<Long> longs = new ArrayList<>();
+            generateListOfLongs(list, longs);
+            return longs.stream().mapToLong(l->l).sum();
+        } else if(type == 1) {
+            List<Long> longs = new ArrayList<>();
+            generateListOfLongs(list, longs);
+            long product = 1;
+            for (int i = 0; i < longs.size(); i++) {
+                product*=longs.get(i);
+            }
+            return product;
+        } else if(type ==2){
+            List<Long> longs = new ArrayList<>();
+            generateListOfLongs(list, longs);
+            return longs.stream().mapToLong(l->l).min().getAsLong();
+        } else if(type == 3){
+            List<Long> longs = new ArrayList<>();
+            generateListOfLongs(list, longs);
+            return longs.stream().mapToLong(l->l).max().getAsLong();
+        } else if(type==4){
+            return (Long) list.get(0);
+        } else if(type==5){
+            List<Long> longs = new ArrayList<>();
+            generateListOfLongs(list, longs);
+            if(longs.get(0) > longs.get(1)) return 1;
+            else return 0;
+        } else if(type == 6){
+            List<Long> longs = new ArrayList<>();
+            generateListOfLongs(list, longs);
+            if(longs.get(0) < longs.get(1)) return 1;
+            else return 0;
+        } else {
+            List<Long> longs = new ArrayList<>();
+            generateListOfLongs(list, longs);
+            if(longs.get(0).equals(longs.get(1))) return 1;
+            else return 0;
+        }
+    }
+
+    private static void generateListOfLongs(List<Object> list, List<Long> longs) {
+        list = (List<Object>) list.get(0);
+        int size = list.size();
+        for (int i = 0; i < size/2; i++) {
+            List<Object> subLongList = new ArrayList<>();
+            subLongList.add(list.remove(0));
+            subLongList.add(list.remove(0));
+            longs.add(parse(subLongList));
+        }
+    }
+
 }
 
 class Executor{
-    String instructions;
-
-
-    public long execute(long result){
-        if(instructions.length() == 0 || instructions.matches("0+")) return result;
-        long version = bin2Long(instructions.substring(0,3));
-        int operation = (int)bin2Long(instructions.substring(3,6));
-        instructions = instructions.substring(6);
-        LinkedList<String>
-
-        switch (operation){
-            case 0:  //sum
-                char typeLengthId = instructions.charAt(0);
-                int sum;
-                    if(typeLengthId == '0'){
-                        caculate
-                    } else {}
-
-                break;
-            case 1: break; //product
-            case 2: break; //minimum
-            case 3: break; //maximum
-            case 4:
-                return calculateLiteral();
-                break; // literal
-
-            case 5: break; //greater than
-            case 6: break; //less than
-            case 7: break; //equal
-        }
-
-    }
-
-    private long calculateLiteral() {
-        boolean lastValue;
-        StringBuilder value  = new StringBuilder();
-        do{
-            lastValue = instructions.charAt(0) != '0';
-            value.append(instructions.substring(1,5));
-            instructions = instructions.substring(5);
-        } while(lastValue);
-        return bin2Long(value.toString());
-
-
-    }
-
-    private static long bin2Long(String bin){
-        return Long.valueOf(bin, 2);
-    }
-
 
 }
 
 class Instructions{
     String instruction;
     List<Instructions> instructions;
+    Long literal;
 
-    public Instructions(List<Instructions> instructions) {
-        this.instructions = instructions;
+    public Instructions() {
+        instructions = new ArrayList<>() ;
+        literal = null;
     }
 
     public String getInstruction() {
@@ -192,11 +250,19 @@ class Instructions{
         return instructions;
     }
 
+    public Long getLiteral() {
+        return literal;
+    }
+
     public void setInstruction(String instruction) {
         this.instruction = instruction;
     }
 
     public void setInstructions(List<Instructions> instructions) {
         this.instructions = instructions;
+    }
+
+    public void setLiteral(Long literal) {
+        this.literal = literal;
     }
 }
