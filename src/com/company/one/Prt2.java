@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Prt2 {
     public static void main(String[] args) {
-        List<String> ls = Utils.readLines("input/1/2.txt");
+        List<String> ls = Utils.readLines("input.txt/1/2.txt");
         int tmp = -1;
         int count = 0;
         int previousSum = 0;

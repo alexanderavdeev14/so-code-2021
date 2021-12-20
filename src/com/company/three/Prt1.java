@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Prt1 {
     public static void main(String[] args) {
-        List<String> input = Utils.readLines("input/3/1.txt");
-        List<String> inputTest = Utils.readLines("input/3/test/1.txt");
+        List<String> input = Utils.readLines("input.txt/3/1.txt");
+        List<String> inputTest = Utils.readLines("input.txt/3/test.txt/1.txt");
         StringBuilder stringBuilder = new StringBuilder();
         StringBuilder stringBuilder2 = new StringBuilder();
         for (int i = 0; i < input.get(0).length() ; i++) {

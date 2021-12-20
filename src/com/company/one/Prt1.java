@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Prt1 {
     public static void main(String[] args) {
-       List<String> ls = Utils.readLines("input/1/1.txt");
+       List<String> ls = Utils.readLines("input.txt/1/1.txt");
         int tmp = -1;
         int count = 0;
         for (var s:

@@ -10,8 +10,8 @@ import java.util.Map;
 public class Solution {
     public static void main(String[] args) {
         int day = 17;
-        List<String> test = Utils.readLines("input/"+day+"/test");
-        List<String> input = Utils.readLines("input/"+day+"/input");
+        List<String> test = Utils.readLines("input.txt/"+day+"/test.txt");
+        List<String> input = Utils.readLines("input.txt/"+day+"/input.txt");
 
         part1(test);
         part1(input);

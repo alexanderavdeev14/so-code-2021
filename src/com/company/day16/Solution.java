@@ -8,11 +8,11 @@ import java.util.List;
 public class Solution {
     public static void main(String[] args) {
         int day = 16;
-        List<String> test = Utils.readLines("input/"+day+"/test");
-        List<String> input = Utils.readLines("input/"+day+"/input");
-        List<String> test2 = Utils.readLines("input/"+day+"/test2");
-//        System.out.println(part1(test));
-//        System.out.println(part1(input));
+        List<String> test = Utils.readLines("input.txt/"+day+"/test.txt");
+        List<String> input = Utils.readLines("input.txt/"+day+"/input.txt");
+        List<String> test2 = Utils.readLines("input.txt/"+day+"/test2");
+//        System.out.println(part1(test.txt));
+//        System.out.println(part1(input.txt));
         System.out.println(part2(test2));
         System.out.println(part2(input));
     }

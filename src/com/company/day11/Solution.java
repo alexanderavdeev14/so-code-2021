@@ -12,8 +12,8 @@ public class Solution {
         int xMax = 10;
         int yMax = 10;
         int steps = 100;
-        List<String> test = Utils.readLines("input/"+day+"/test");
-        List<String> input = Utils.readLines("input/"+day+"/input");
+        List<String> test = Utils.readLines("input.txt/"+day+"/test.txt");
+        List<String> input = Utils.readLines("input.txt/"+day+"/input.txt");
         System.out.println(part1(test, xMax  , yMax,steps));
         System.out.println(part1(input, xMax, yMax, steps));
         System.out.println(part2(test,xMax,yMax));

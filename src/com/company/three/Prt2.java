@@ -9,8 +9,8 @@ public class Prt2 {
 
     public static void main(String[] args) {
 
-        List<String> input1 = Utils.readLines("input/3/2.txt");
-        List<String> input2 = Utils.readLines("input/3/2.txt");
+        List<String> input1 = Utils.readLines("input.txt/3/2.txt");
+        List<String> input2 = Utils.readLines("input.txt/3/2.txt");
 
         int i=0;
         int one=0;
@@ -47,8 +47,8 @@ public class Prt2 {
 
         }
         i=0;
-        input1 = Utils.readLines("input/3/2.txt");
-        input2 = Utils.readLines("input/3/2.txt");
+        input1 = Utils.readLines("input.txt/3/2.txt");
+        input2 = Utils.readLines("input.txt/3/2.txt");
         while(true){
             List<String> lssOne = new ArrayList<>();
             List<String> lssZero = new ArrayList<>();

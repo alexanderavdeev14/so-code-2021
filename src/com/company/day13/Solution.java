@@ -7,9 +7,9 @@ import java.util.List;
 public class Solution {
     public static void main(String[] args) {
         int day = 13;
-        List<String> test = Utils.readLines("input/"+day+"/test");
-        List<String> input = Utils.readLines("input/"+day+"/input");
-//        System.out.println(part1(test));
+        List<String> test = Utils.readLines("input.txt/"+day+"/test.txt");
+        List<String> input = Utils.readLines("input.txt/"+day+"/input.txt");
+//        System.out.println(part1(test.txt));
         System.out.println(part1(input));
         System.out.println(part2(test));
         System.out.println(part2(input));

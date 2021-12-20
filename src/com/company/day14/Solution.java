@@ -10,8 +10,8 @@ import java.util.Set;
 public class Solution {
     public static void main(String[] args) {
         int day = 14;
-        List<String> test = Utils.readLines("input/"+day+"/test");
-        List<String> input = Utils.readLines("input/"+day+"/input");
+        List<String> test = Utils.readLines("input.txt/"+day+"/test.txt");
+        List<String> input = Utils.readLines("input.txt/"+day+"/input.txt");
         System.out.println(part1(test,10)+","+part2(test,10));
         System.out.println(part1(input,10)+","+part2(input,10));
         System.out.println(part2(test,40));

@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 public class Solution {
     public static void main(String[] args) {
         int day = 8;
-        List<String> test = Utils.readLines("input/"+day+"/test");
-        List<String> input = Utils.readLines("input/"+day+"/input");
-//        System.out.println(part1(test,  new int[]{1,4,7,8}));
-//        System.out.println(part1(input,  new int[]{1,4,7,8}));
+        List<String> test = Utils.readLines("input.txt/"+day+"/test.txt");
+        List<String> input = Utils.readLines("input.txt/"+day+"/input.txt");
+//        System.out.println(part1(test.txt,  new int[]{1,4,7,8}));
+//        System.out.println(part1(input.txt,  new int[]{1,4,7,8}));
         System.out.println(part2(test));
-//        System.out.println(part2(input));
+//        System.out.println(part2(input.txt));
     }
 
     private static String part1(List<String> input, int[] numbers){

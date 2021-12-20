@@ -7,8 +7,8 @@ import java.util.List;
 public class Prt2 {
 
     public static void main(String[] args) {
-        List<String> input = Utils.readLines("input/2/2.txt");
-        List<String> inputTest = Utils.readLines("input/2/test/2.txt");
+        List<String> input = Utils.readLines("input.txt/2/2.txt");
+        List<String> inputTest = Utils.readLines("input.txt/2/test.txt/2.txt");
 
         int horizontal=0;
         int aim=0;

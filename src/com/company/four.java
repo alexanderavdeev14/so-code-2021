@@ -6,8 +6,8 @@ import java.util.List;
 
 public class four {
     public static void main(String[] args) {
-//        System.out.println(prt1(Utils.readLines("input/4/test/1.txt")));
-        System.out.println(prt2(Utils.readLines("input/4/test/1.txt")));
+//        System.out.println(prt1(Utils.readLines("input.txt/4/test.txt/1.txt")));
+        System.out.println(prt2(Utils.readLines("input.txt/4/test.txt/1.txt")));
     }
 
     private static String prt1(List<String> input){

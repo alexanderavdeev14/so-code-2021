@@ -7,9 +7,9 @@ import java.util.List;
 public class FourPretty {
 
     public static void main(String[] args) {
-        List<String> test = Utils.readLines("input/4/" +
+        List<String> test = Utils.readLines("input.txt/4/" +
                 "testInput");
-        List<String> input =  Utils.readLines("input/4/" +
+        List<String> input =  Utils.readLines("input.txt/4/" +
                 "puzzleInput");
         System.out.println(solution1(test));
         System.out.println(solution2(test));

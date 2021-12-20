@@ -19,8 +19,8 @@ public class Utils {
     }
 
     public static List<String> readLines(String path){
-        BufferedReader reader = getReader(path);
-        try {
+
+        try(BufferedReader reader = getReader(path)) {
             String line;
             List<String> ls = new ArrayList<>();
             while((line = reader.readLine()) != null){
